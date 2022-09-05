@@ -1,6 +1,7 @@
 import { LitElement, css, html } from "lit";
-import "./style.css";
-import "./WrapperElement";
+import "../style.css";
+import "./Components/WrapperElement";
+import "./views/Home";
 //@customElement("lit-app")
 export class App extends LitElement {
   static styles = css`
@@ -45,21 +46,8 @@ export class App extends LitElement {
         <a href="/blog">Blog</a>
         <a href="/about">About</a>
       </div>
-      <div class="header">
-        <h2>LitElement Website</h2>
-      </div>
-
       <wrapper-element>
-        <p>
-          Deserunt aliquip ullamco ex consequat ut deserunt esse ipsum sint
-          irure sint. Nisi nisi reprehenderit dolor proident nostrud sint
-          laboris. Consectetur qui anim adipisicing irure amet cillum. Sit
-          cillum aliquip laborum commodo. Ex ea velit nisi amet qui proident
-          aliqua deserunt pariatur excepteur sit consequat. Enim duis sint est
-          commodo sit pariatur. Non duis nisi adipisicing eiusmod. Nulla laboris
-          amet anim esse laborum et. Ut pariatur cillum laborum aliquip culpa.
-          Nostrud tempor qui in aute deserunt.
-        </p>
+        <home-page></home-page>
       </wrapper-element>
     `;
   }
