@@ -6,6 +6,7 @@ export default class initRouter {
 
     constructor() {
       this.routes = [{
+        name: 'Home',
         path: "/",
         component: "home",
         action:  () => {
@@ -13,6 +14,7 @@ export default class initRouter {
         }
       },
       {
+        name: 'About',
         path: "/about",
         component: "about-element",
         action: () => {
@@ -20,6 +22,7 @@ export default class initRouter {
           }
       },
       {
+        name: 'Logout',
         path: "/login",
         component: "login-element",
         action: async () => {

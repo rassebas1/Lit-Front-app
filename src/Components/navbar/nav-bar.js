@@ -6,9 +6,28 @@ export class NavBar extends LitElement {
     }
     static styles = [
         css`
-            :host {
-                display: block;
-                border: 2px solid blue;
+            nav {
+                margin: 5% auto;
+                background-color: #594cec;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                width: 40%;
+                height: 5vh;
+                border-radius: 30px;
+                box-shadow:  4px 10px 40px #df9292,
+                -4px -10px 30px #dcdcdd;
+            }
+            a {
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                text-decoration: none;
+                color: white;
+                font-weight: bold;
+            }
+            a:hover {
+                color: #9f0909;
+                text-shadow: 2px 2px 4px #ffff;
+                
             }
         `
     ];

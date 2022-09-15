@@ -67,7 +67,7 @@ export class App extends LitElement {
     console.log(this.link)
     return this.link.map((item) =>{
       return {
-        name: item.component,
+        name: item.name,
         path: item.path,
       }
       })
