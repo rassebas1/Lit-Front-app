@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/mocha/mocha.css"
+    />
+
+    <title>Test for Lit Components</title>
+  </head>
+  <body>
+    <div id="mocha">aja</div>
+
+    <script src="https://unpkg.com/chai/chai.js"></script>
+    <script src="https://unpkg.com/mocha/mocha.js"></script>
+    <script class="mocha-init">
+      mocha.setup({
+        ui: "bdd",
+      });
+      mocha.checkLeaks();
+      let expect = chai.expect;
+    </script>
+    <script src="../src/main.js" type="module"></script>
+    <script src="./firstTest.test.js" type="module"></script>
+    <script src="./a11y-input.test.js" type="module"></script>
+    <script>
+      mocha.run();
+    </script>
+  </body>
+</html>

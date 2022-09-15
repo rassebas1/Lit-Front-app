@@ -1,9 +1,11 @@
 import { LitElement, css, html } from "lit";
-import "../style.css";
-import "./Components/WrapperElement";
-import "./views/Home";
+//import "../style.css";
+import "./Components/WrapperElement.js";
+import { ProductService } from "./services/Products.js";
+import "./views/Home.js";
 //@customElement("lit-app")
 export class App extends LitElement {
+  //#region css
   static styles = css`
     body {
       padding: 0px;
@@ -38,7 +40,25 @@ export class App extends LitElement {
       color: white;
     }
   `;
+  //#endregion
 
+  constructor() {
+    super();
+    this.productService = new ProductService();
+    Promise.all([
+      this.productService.fetchAllProducts(),
+      this.productService.fetchProductById(2),
+      this.productService.fetchCart(),
+      this.productService.fetchUser(),
+      //this.productService.isAuth(),
+    ])
+      .catch((e) => console.log("error", e))
+      .finally(() => {
+        console.log("cart", this.productService.cart);
+        console.log("user", this.productService.user);
+        console.log("product", this.productService.products);
+      });
+  }
   render() {
     return html`
       <div class="topnav">
