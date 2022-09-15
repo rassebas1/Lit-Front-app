@@ -1,8 +1,11 @@
 import { LitElement, css, html } from "lit";
 import "../style.css";
 import "./Components/WrapperElement";
+import './Components/navbar/nav-bar'
 import "./views/Home";
-//@customElement("lit-app")
+import initRouter from "./Components/routes/routes";
+
+
 export class App extends LitElement {
   static styles = css`
     body {
@@ -39,16 +42,41 @@ export class App extends LitElement {
     }
   `;
 
+  static properties = {
+      link: { type: Array }
+  }
+
+  constructor(){
+    super();
+  }
+
+  connectedCallback(){
+      super.connectedCallback()
+      const dominio = document.getElementById('outlet');
+      const router = new initRouter;
+      router.inicializar(dominio)
+      this.link = router.rutas;
+      console.log(this.link)
+  }
+  /*disconnectedCallback(){
+    window.removeEventListener('load', () =>{
+    })
+  }*/
+  
+  transformar(){
+    console.log(this.link)
+    return this.link.map((item) =>{
+      return {
+        name: item.component,
+        path: item.path,
+      }
+      })
+  };
   render() {
     return html`
-      <div class="topnav">
-        <a class="active" href="/">Home</a>
-        <a href="/blog">Blog</a>
-        <a href="/about">About</a>
-      </div>
-      <wrapper-element>
-        <home-page></home-page>
-      </wrapper-element>
+      <nav-bar .rutas=${this.transformar()}></nav-bar>
+      <output></output>
+      <slot></slot>
     `;
   }
 }
