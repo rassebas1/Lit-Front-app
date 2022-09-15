@@ -1,12 +1,14 @@
 import { LitElement, css, html } from "lit";
+
 import "../style.css";
 import "./Components/WrapperElement";
 import './Components/navbar/nav-bar'
 import "./views/Home";
 import initRouter from "./Components/routes/routes";
-
+import { ProductService } from "./services/Products.js";
 
 export class App extends LitElement {
+  //#region css
   static styles = css`
     body {
       padding: 0px;
@@ -41,6 +43,7 @@ export class App extends LitElement {
       color: white;
     }
   `;
+  //#endregion
 
   static properties = {
       link: { type: Array }
@@ -48,6 +51,20 @@ export class App extends LitElement {
 
   constructor(){
     super();
+        this.productService = new ProductService();
+    Promise.all([
+      this.productService.fetchAllProducts(),
+      this.productService.fetchProductById(2),
+      this.productService.fetchCart(),
+      this.productService.fetchUser(),
+      //this.productService.isAuth(),
+    ])
+      .catch((e) => console.log("error", e))
+      .finally(() => {
+        console.log("cart", this.productService.cart);
+        console.log("user", this.productService.user);
+        console.log("product", this.productService.products);
+      });
   }
 
   connectedCallback(){
@@ -72,6 +89,7 @@ export class App extends LitElement {
       }
       })
   };
+  
   render() {
     return html`
       <nav-bar .rutas=${this.transformar()}></nav-bar>
