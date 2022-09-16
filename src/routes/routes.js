@@ -7,11 +7,11 @@ export default class initRouter {
   constructor() {
     this.routes = [
       {
-        name: "Home",
+        name: "login",
         path: "/",
-        component: "home-page",
+        component: "login-element",
         action: () => {
-          import("../../views/Home");
+          import("../views/login-element.js");
         },
       },
       {
@@ -19,15 +19,15 @@ export default class initRouter {
         path: "/about",
         component: "about-element",
         action: () => {
-          import("../../views/about-element");
+          import("../views/about-element");
         },
       },
       {
-        name: "Logout",
-        path: "/login",
-        component: "login-element",
+        name: "home",
+        path: "/home",
+        component: "home-page",
         action: async () => {
-          await import("../../views/login-element");
+          await import("../views/Home.js");
         },
       },
     ];
