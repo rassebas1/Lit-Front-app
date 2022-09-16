@@ -2,7 +2,7 @@ import { LitElement, css, html } from "lit";
 
 import "../style.css";
 import "./Components/WrapperElement";
-import './Components/navbar/nav-bar'
+import "./Components/navbar/nav-bar";
 import "./views/Home";
 import initRouter from "./Components/routes/routes";
 import { ProductService } from "./services/Products.js";
@@ -46,12 +46,12 @@ export class App extends LitElement {
   //#endregion
 
   static properties = {
-      link: { type: Array }
-  }
+    link: { type: Array },
+  };
 
-  constructor(){
+  constructor() {
     super();
-        this.productService = new ProductService();
+    this.productService = new ProductService();
     Promise.all([
       this.productService.fetchAllProducts(),
       this.productService.fetchProductById(2),
@@ -67,29 +67,29 @@ export class App extends LitElement {
       });
   }
 
-  connectedCallback(){
-      super.connectedCallback()
-      const dominio = document.getElementById('outlet');
-      const router = new initRouter;
-      router.inicializar(dominio)
-      this.link = router.rutas;
-      console.log(this.link)
+  connectedCallback() {
+    super.connectedCallback();
+    const dominio = document.getElementById("outlet");
+    const router = new initRouter();
+    router.inicializar(dominio);
+    this.link = router.rutas;
+    console.log(this.link);
   }
   /*disconnectedCallback(){
     window.removeEventListener('load', () =>{
     })
   }*/
-  
-  transformar(){
-    console.log(this.link)
-    return this.link.map((item) =>{
+
+  transformar() {
+    console.log(this.link);
+    return this.link.map((item) => {
       return {
         name: item.name,
         path: item.path,
-      }
-      })
-  };
-  
+      };
+    });
+  }
+
   render() {
     return html`
       <nav-bar .rutas=${this.transformar()}></nav-bar>
