@@ -4,7 +4,7 @@ import "../style.css";
 import "./Components/WrapperElement";
 import "./Components/navbar/nav-bar";
 import "./views/Home";
-import initRouter from "./Components/routes/routes";
+import initRouter from "./routes/routes";
 import { ProductService } from "./services/Products.js";
 
 export class App extends LitElement {
@@ -47,6 +47,8 @@ export class App extends LitElement {
 
   static properties = {
     link: { type: Array },
+    loginSuccess: { type: Boolean },
+    router: {type: Object}
   };
 
   constructor() {
@@ -70,10 +72,11 @@ export class App extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     const dominio = document.getElementById("outlet");
-    const router = new initRouter();
-    router.inicializar(dominio);
-    this.link = router.rutas;
+    this.router = new initRouter();
+    this.router.inicializar(dominio);
+    this.link = this.router.rutas;
     console.log(this.link);
+    console.log("this.router.router",this.router.router);
   }
   /*disconnectedCallback(){
     window.removeEventListener('load', () =>{
@@ -90,11 +93,33 @@ export class App extends LitElement {
     });
   }
 
+  loginAccess(logged){
+    if(logged){
+      this.router.router.urlForName("home");
+    }else{
+      return
+    }
+  }
+
   render() {
+    // const dominio = document.getElementById("outlet");
+    // this.router = new initRouter();
+    // this.router.inicializar(dominio);
+    // this.link = this.router.rutas[0].children;
+    // console.log(this.link);
+
     return html`
-      <nav-bar .rutas=${this.transformar()}></nav-bar>
+    ${this.loginSuccess
+      ? html`<nav-bar .rutas=${this.transformar()}></nav-bar>`
+      : html`<login-element
+          @login="${(e) => {
+            this.loginSuccess=e.detail;
+            this.loginAccess(this.loginSuccess);
+            this.router.router.urlForName("home");
+          }}"
+        ></login-element>`}
       <output></output>
-      <slot></slot>
+    <slot></slot>
     `;
   }
 }
