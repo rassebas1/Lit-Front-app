@@ -30,6 +30,14 @@ export default class initRouter {
           await import("../views/Home.js");
         },
       },
+      {
+        name: "products",
+        path: "/products",
+        component: "products-element",
+        action: async () => {
+          await import("../Components/product-showcase/products-element");
+        },
+      },
     ];
 
     this.router = {};

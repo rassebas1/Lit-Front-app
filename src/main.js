@@ -5,7 +5,6 @@ import "./Components/WrapperElement";
 import "./Components/navbar/nav-bar";
 import "./views/Home";
 import initRouter from "./routes/routes";
-import { ProductService } from "./services/Products.js";
 
 export class App extends LitElement {
   //#region css
@@ -48,25 +47,12 @@ export class App extends LitElement {
   static properties = {
     link: { type: Array },
     loginSuccess: { type: Boolean },
-    router: {type: Object}
+    router: { type: Object },
   };
 
   constructor() {
     super();
-    this.productService = new ProductService();
-    Promise.all([
-      this.productService.fetchAllProducts(),
-      this.productService.fetchProductById(2),
-      this.productService.fetchCart(),
-      this.productService.fetchUser(),
-      //this.productService.isAuth(),
-    ])
-      .catch((e) => console.log("error", e))
-      .finally(() => {
-        console.log("cart", this.productService.cart);
-        console.log("user", this.productService.user);
-        console.log("product", this.productService.products);
-      });
+    this.loginSuccess = true;
   }
 
   connectedCallback() {
@@ -76,7 +62,7 @@ export class App extends LitElement {
     this.router.inicializar(dominio);
     this.link = this.router.rutas;
     console.log(this.link);
-    console.log("this.router.router",this.router.router);
+    console.log("this.router.router", this.router.router);
   }
   /*disconnectedCallback(){
     window.removeEventListener('load', () =>{
@@ -93,11 +79,11 @@ export class App extends LitElement {
     });
   }
 
-  loginAccess(logged){
-    if(logged){
+  loginAccess(logged) {
+    if (logged) {
       this.router.router.urlForName("home");
-    }else{
-      return
+    } else {
+      return;
     }
   }
 
@@ -109,17 +95,17 @@ export class App extends LitElement {
     // console.log(this.link);
 
     return html`
-    ${this.loginSuccess
-      ? html`<nav-bar .rutas=${this.transformar()}></nav-bar>`
-      : html`<login-element
-          @login="${(e) => {
-            this.loginSuccess=e.detail;
-            this.loginAccess(this.loginSuccess);
-            this.router.router.urlForName("home");
-          }}"
-        ></login-element>`}
+      ${this.loginSuccess
+        ? html`<nav-bar .rutas=${this.transformar()}></nav-bar>`
+        : html`<login-element
+            @login="${(e) => {
+              this.loginSuccess = e.detail;
+              this.loginAccess(this.loginSuccess);
+              this.router.router.urlForName("home");
+            }}"
+          ></login-element>`}
       <output></output>
-    <slot></slot>
+      <slot></slot>
     `;
   }
 }
