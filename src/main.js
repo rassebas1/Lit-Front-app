@@ -5,6 +5,7 @@ import './Components/navbar/nav-bar'
 import "./views/Home";
 import initRouter from "./Components/routes/routes";
 import { ProductService } from "./services/Products.js";
+import { LoginElement } from "./views/login-element";
 export class App extends LitElement {
   //#region css
   static styles = css`
@@ -44,7 +45,8 @@ export class App extends LitElement {
   //#endregion
 
   static properties = {
-      link: { type: Array }
+      link: { type: Array },
+      succes: { type: Boolean }
   }
 
   constructor(){
@@ -63,6 +65,7 @@ export class App extends LitElement {
         console.log("user", this.productService.user);
         console.log("product", this.productService.products);
       });
+      this.succes = false;
   }
 
   connectedCallback(){
@@ -89,9 +92,7 @@ export class App extends LitElement {
   };
   render() {
     return html`
-      <nav-bar .rutas=${this.transformar()}></nav-bar>
-      <output></output>
-      <slot></slot>
+      ${this.succes ? html`<nav-bar .rutas=${this.transformar()}></nav-bar>`: html`<login-element></login-element>`}
     `;
   }
 }

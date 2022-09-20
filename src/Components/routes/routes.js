@@ -7,7 +7,7 @@ export default class initRouter {
     constructor() {
       this.routes = [{
         name: 'Home',
-        path: "/",
+        path: "/home",
         component: "home",
         action:  () => {
            import("../../views/Home");
@@ -23,7 +23,7 @@ export default class initRouter {
       },
       {
         name: 'Logout',
-        path: "/login",
+        path: "/",
         component: "login-element",
         action: async () => {
           await import("../../views/login-element")
