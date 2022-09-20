@@ -7,13 +7,13 @@ export class NavBar extends LitElement {
   static styles = [
     css`
       nav {
-        margin: 5% auto;
+        margin: 2%;
         background-color: #594cec;
         display: flex;
         justify-content: space-around;
         align-items: center;
-        width: 40%;
-        height: 5vh;
+        width: 50vw;
+        height: 8vh;
         border-radius: 30px;
         box-shadow: 4px 10px 40px #df9292, -4px -10px 30px #dcdcdd;
       }
