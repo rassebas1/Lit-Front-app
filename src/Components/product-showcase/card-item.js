@@ -3,20 +3,20 @@ import { LitElement, html, css } from "lit";
 export class CardElement extends LitElement {
   static styles = css`
     .card-container {
+      cursor: pointer;
       padding: 5px;
       position: relative;
       display: flex;
       flex-direction: column;
       justify-items: center;
-      border: 1px solid blue;
       border-radius: 10px;
-      width: 300px;
-      height: 400px;
-      margin: 5px;
+      width: 100%;
+      height: 66vh;
+      box-shadow: 2px 2px 30px #828282, -2px -2px 30px #2c46a56b;
     }
     .card-container img {
       width: 90%;
-      height: 230px;
+      height: 50%;
       align-self: center;
     }
     .card-container ul {
@@ -31,28 +31,31 @@ export class CardElement extends LitElement {
       margin: 2px;
     }
     .card-front {
-      position: absolute;
-      opacity: 1;
+      height: 100%;
+      flex-direction: column;
+      align-items: center;
+    }
+    .card-front h4 {
+      text-align: center;
     }
     .card-back {
-      position: absolute;
+      height: 100%;
+      text-align: center;
       opacity: 0;
+    }
+    .card-back p {
+      overflow: hidden;
     }
     .animarOut {
       display: none;
       opacity: 0;
     }
     .animarIn {
-      display: block;
+      display: flex;
       opacity: 1;
       animation: hoverCardFadeIN 0.7s ease-in-out;
     }
-    .card-container:hover .card-front {
-      /*animation: hoverCardFadeOut 0.5s ease;*/
-    }
-    .card-container:hover .card-back {
-      /*animation: hoverCardFadeIN 0.5s ease;*/
-    }
+    
     @keyframes hoverCardFadeIN {
       0% {
         transform: rotateY(180deg);

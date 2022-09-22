@@ -14,8 +14,6 @@ export class App extends LitElement {
       margin: 0px;
     }
     .content-app{
-      width: 100vw;
-      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -23,7 +21,6 @@ export class App extends LitElement {
 
     }
     .content{
-      width: 100vw;
       height: 90vh;
       display: flex;
       align-items: center;
@@ -66,14 +63,6 @@ export class App extends LitElement {
         path: item.path,
       };
     });
-  }
-
-  loginAccess(logged) {
-    if (logged) {
-      this.router.router.urlForName("home");
-    } else {
-      return ;
-    }
   }
 
   render() {

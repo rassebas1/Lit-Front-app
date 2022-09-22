@@ -1,17 +1,18 @@
 import { LitElement, html, css, render } from "lit";
 import "./card-item";
 import { ProductService } from "../../services/Products";
+import '../Indicador/carga'
 
 export class ProductsElement extends LitElement {
   static styles = css`
     .products-container {
-      width: 100%;
+      width: 91vw;
       height: 70vh;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      align-content: flex-start;
+      display: grid;
+      grid-auto-rows: 27rem;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+      
     }
   `;
   static get properties() {
@@ -39,7 +40,11 @@ export class ProductsElement extends LitElement {
       });
   }
   render() {
-    return html`<div class="products-container">${this._renderCards()}</div>`;
+    if(this.products !== undefined) {
+      return  html`<div class="products-container">${this._renderCards()}</div>`;
+    }else {
+      return html`<carga-indicador></carga-indicador>`
+    }
   }
 
   _renderCards() {

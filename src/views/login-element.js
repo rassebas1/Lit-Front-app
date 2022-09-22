@@ -3,32 +3,36 @@ import { LitElement, html, css } from "lit";
 export class LoginElement extends LitElement {
   static styles = [
     css`
-      .container{
-        padding: 5px;
-        border: 1px solid red;
+      .container {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        border-radius: 20px;
+        background-color: rgb(190 248 255);
+        padding: 15px;
         width: 25vw;
-        height: 45vh;
+        height: 50vh;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        margin: auto;
       }
-      .container h1{
+      .container h1 {
         text-align: center;
-        color: blue;
-        text-shadow: 2px 2px 4px grey;
+        color: #ea1717;
+        text-shadow: #474646 2px 2px 4px;
         font-weight: bold;
         font-size: 2.7rem;
       }
-      .container input{
-        width: 90%;
+      .container input {
+        width: 96%;
+        border: none;
         border-radius: 5px;
         padding: 5px;
         margin: 5px auto;
       }
-      .container button{
+      input:focus-visible {
+        outline: none;
+      }
+      .container button {
         border-radius: 5px;
-        margin: 20px auto;
+        margin: 6vh auto;
         width: 50%;
         border: none;
         background-color: #93e6f0;
@@ -127,7 +131,7 @@ export class LoginElement extends LitElement {
 
         <input
           type="password"
-          placeholder="password"
+          placeholder="Password"
           id="user-pass"
           @change=${(e) => {
             this.password = e.target.value;
